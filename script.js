@@ -4,7 +4,8 @@
 // 6. Adicione na classe Corrida um método que exibe na tela quem é o vencedor da
 // corrida.
 // 7. Crie um objeto da classe Corrida e chame seus métodos.
-let car = [];
+let car = [],
+  pistas = [];
 
 class Car {
   Nomes;
@@ -38,24 +39,56 @@ class Race {
     return vencedor;
   }
 }
-
-let mercedes = new Car();
-mercedes.Nomes = "Cla A45 Amg";
-mercedes.Potencia = 240;
-mercedes.Velocidade = 220;
-mercedes.Aceleração = 2.0;
-
-let honda = new Car();
-honda.Nomes = "Civic G10";
-honda.Potencia = 210;
-honda.Velocidade = 210;
-honda.Aceleração = 3.0;
-
-car.push(honda, mercedes);
-
-let pista = new Race();
-pista.Nome = "Monaco Race";
-pista.Tipo = "Car Race";
-pista.Distancia = 10000;
-pista.Vencedor = pista.Winner();
-console.log(pista.Vencedor);
+let loop = true;
+while (loop) {
+  var choice = Number(prompt("1-Cadastrar Carro \n2-Corridas \n3-Sair"));
+  switch (choice) {
+    case 1:
+      createCar();
+      break;
+    case 2:
+      createRace();
+      break;
+    case 3:
+      alert("Programa Finalizado");
+      loop = false;
+      break;
+    default:
+      alert("Opção Invalida");
+      break;
+  }
+}
+function createCar() {
+  let carro = new Car();
+  carro.Nomes = String(prompt("Nome do Carro:"));
+  carro.Potencia = Number(prompt("Cv do Carro:"));
+  carro.Velocidade = Number(prompt("Velocidade Maxima do Carro:"));
+  carro.Aceleração = Number(prompt("De 0 a 100 Em:"));
+  car.push(carro);
+}
+function createRace() {
+  let choice = Number(prompt("1-Cadastrar Corrida \n2-Vencedor \n3-Sair")),
+    loop = true;
+  while (loop) {
+    switch (choice) {
+      case 1:
+        let pista = new Race();
+        pista.Nome = String(prompt("Nome da Pista"));
+        pista.Tipo = String(prompt("Tipo da Corrida"));
+        pista.Distancia = Number(prompt("Distancia Da Pista:"));
+        pistas.push(pista);
+        loop = false;
+        break;
+      case 2:
+        alert(pistas[0].Winner());
+        loop = false;
+        break;
+      case 3:
+        loop = false;
+        break;
+      default:
+        alert("Opção Invalida");
+        break;
+    }
+  }
+}
